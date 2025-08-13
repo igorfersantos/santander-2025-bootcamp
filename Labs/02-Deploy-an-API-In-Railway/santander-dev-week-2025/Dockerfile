@@ -15,8 +15,9 @@ RUN chmod +x gradlew && ./gradlew --version
 # Copy source code
 COPY src ./src
 
-# Build the application
-RUN ./gradlew clean build -x test --no-daemon
+# Build the application and list the output directory
+RUN ./gradlew clean bootJar -x test --no-daemon && \
+    ls -la /app/build/libs/
 
 # Production stage
 FROM eclipse-temurin:21-jre-jammy
@@ -24,7 +25,10 @@ FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
 
 # Copy the built JAR file
-COPY --from=build /app/build/libs/santander-dev-week-2025-*.jar app.jar
+COPY --from=build /app/build/libs/app.jar .
+
+# Verify the file was copied
+RUN ls -la /app/
 
 # Expose the application port
 EXPOSE 8080

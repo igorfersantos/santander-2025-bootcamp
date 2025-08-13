@@ -29,14 +29,9 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-tasks.jar {
-    manifest {
-        attributes["Main-Class"] = "br.com.igorfernandes.santander.Application"
-    }
-}
-
 tasks.bootJar {
     archiveFileName.set("${project.name}.jar")
+    launchScript()
 }
 
 tasks.withType<Test> {

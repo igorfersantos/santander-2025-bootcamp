@@ -30,8 +30,16 @@ dependencies {
 }
 
 tasks.bootJar {
-    archiveFileName.set("${project.name}.jar")
+    archiveFileName.set("app.jar")
+    manifest {
+        attributes("Start-Class" to "br.com.igorfernandes.santander.Application")
+        attributes("Main-Class" to "org.springframework.boot.loader.PropertiesLauncher")
+    }
     launchScript()
+}
+
+tasks.jar {
+    enabled = false
 }
 
 tasks.withType<Test> {

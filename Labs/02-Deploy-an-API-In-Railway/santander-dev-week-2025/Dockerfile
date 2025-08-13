@@ -27,11 +27,14 @@ WORKDIR /app
 # Copy the built JAR file
 COPY --from=build /app/build/libs/app.jar .
 
+# Set the active profile to 'prd' for production
+ENV SPRING_PROFILES_ACTIVE=prd
+
 # Verify the file was copied
 RUN ls -la /app/
 
 # Expose the application port
 EXPOSE 8080
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Run the application with the prd profile
+ENTRYPOINT ["java", "-Dspring.profiles.active=prd", "-jar", "app.jar"]

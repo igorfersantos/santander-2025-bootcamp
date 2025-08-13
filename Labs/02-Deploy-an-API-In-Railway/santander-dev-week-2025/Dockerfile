@@ -4,15 +4,13 @@ FROM eclipse-temurin:21-jdk-jammy as build
 # Set working directory
 WORKDIR /app
 
-# Copy Gradle files
-COPY build.gradle.kts settings.gradle.kts ./
+# Copy Gradle wrapper and build files first (better caching)
+COPY gradlew .
 COPY gradle ./gradle
+COPY build.gradle.kts settings.gradle.kts ./
 
-# Make gradlew executable
-RUN chmod +x ./gradlew
-
-# Download dependencies
-RUN ./gradlew dependencies --no-daemon
+# Make gradlew executable and download dependencies
+RUN chmod +x gradlew && ./gradlew --version
 
 # Copy source code
 COPY src ./src

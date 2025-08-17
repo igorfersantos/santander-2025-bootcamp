@@ -1,0 +1,11 @@
+services:
+  db:
+    image: mysql:8.3.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: jdbc-java
+      MYSQL_PASSWORD: jdbc-java
+      MYSQL_DATABASE: jdbc-java
+    ports:
+      - "3306:3306"
+

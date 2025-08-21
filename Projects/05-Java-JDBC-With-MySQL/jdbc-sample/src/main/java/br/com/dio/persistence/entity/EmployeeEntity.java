@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 /**
  * Class that represents an Employee Entity.
@@ -17,4 +18,6 @@ public class EmployeeEntity {
     private OffsetDateTime birthday;
 
     private BigDecimal salary;
+
+    private List<ContactEntity> contacts;
 }

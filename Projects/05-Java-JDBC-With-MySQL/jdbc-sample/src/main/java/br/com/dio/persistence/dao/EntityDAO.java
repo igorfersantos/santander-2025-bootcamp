@@ -1,6 +1,7 @@
 package br.com.dio.persistence.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -8,40 +9,6 @@ import java.util.List;
  *
  * @param <T> The Entity Class that the DAO will operate upon.
  */
-interface EntityDAO<T> {
-    /**
-     * Inserts a new entity into the database.
-     *
-     * @param entity The entity to be inserted.
-     */
-    void insert(final T entity);
+public interface EntityDAO<T> extends Findable<T>, Insertable<T>, Updatable<T>, Deletable {
 
-    /**
-     * Updates an existing entity in the database.
-     *
-     * @param entity The entity to be updated.
-     */
-    void update(final T entity);
-
-    /**
-     * Deletes an entity from the database based on its ID.
-     *
-     * @param id The ID of the entity to be deleted.
-     */
-    void delete(final long id);
-
-    /**
-     * Returns a list of all entities in the database.
-     *
-     * @return A list of all entities in the database.
-     */
-    List<T> findAll();
-
-    /**
-     * Finds an entity by its ID in the database.
-     *
-     * @param id The ID of the entity to be found.
-     * @return The entity with the given ID, or null if no such entity exists.
-     */
-    T findById(final long id);
 }
